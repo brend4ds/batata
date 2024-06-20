@@ -11,4 +11,9 @@ class Animal extends Model
 
     protected $table = 'animais';
 
+    protected $fillable = [
+        'id',
+        'nome',
+        'idade'
+    ];
 }
