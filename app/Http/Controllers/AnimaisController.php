@@ -33,6 +33,25 @@ class AnimaisController extends Controller
             'animal' => $animal
         ]);
     }
+
+    public function editar(Animal $animal) {
+        return view('animais/editar', [
+            'animal' => $animal
+        ]);
+    }
+
+    public function editarGravar(Request $form, Animal $animal){
+        $dados = $form->validate([
+        'nome' => 'required|max:255',
+        'idade' => 'required|integer',
+        ]);
+
+        $animal->fill($dados);
+        $animal->save();
+        return redirect()->route('animais');
+    }
+
+    
 }
 
 
