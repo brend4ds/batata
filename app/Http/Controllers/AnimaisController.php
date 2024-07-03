@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnimaisController extends Controller
 {
@@ -28,17 +29,24 @@ class AnimaisController extends Controller
         return redirect()->route('animais');
     }
 
-    public function apagar( Animal $animal){
+    public function apagar( Animal $animal){//mostra na tela a confirmacao
         return view('animais.apagar', [
             'animal' => $animal
         ]);
     }
 
-    public function editar(Animal $animal) {
+    public function deletar(Animal $animal){
+        $animal->delete();
+        return redirect()->route('animais');
+    }
+
+    public function editar(Animal $animal) {//apaga do banco
         return view('animais/editar', [
             'animal' => $animal
         ]);
     }
+
+  
 
     public function editarGravar(Request $form, Animal $animal){
         $dados = $form->validate([
