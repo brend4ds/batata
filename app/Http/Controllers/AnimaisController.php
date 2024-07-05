@@ -46,8 +46,6 @@ class AnimaisController extends Controller
         ]);
     }
 
-  
-
     public function editarGravar(Request $form, Animal $animal){
         $dados = $form->validate([
         'nome' => 'required|max:255',

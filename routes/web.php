@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AnimaisController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('iniciar');
+}) -> name('index');
 
 Route::get('/animais', [AnimaisController::class, 'index'])->name('animais'); //quando acessar o get ele vai pegar a classe e acessar o index
 
@@ -34,3 +35,13 @@ Route::get('/clientes/apagar/{animal}', [ClientesController::class,'apagar']) ->
 
 Route::delete('/clientes/apagar/{animal}', [ClientesController::class,'apagar']);
 
+
+Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
+
+Route::post('/usuarios/cadastrar', [UsuariosController::class, 'gravar']) -> name('usuarios.gravar');
+
+Route::get('/usuarios/apagar/{usuario}', [UsuariosController::class,'apagar']) -> name ('usuarios.apagar');//passar animal por parametro
+
+Route::get('/usuarios/editar/{usuario}', [UsuariosController::class, 'editar'])->name('usuarios.editar');
+
+Route::put('/usuarios/editar/{usuario}', [UsuariosController::class, 'editarGravar']);
