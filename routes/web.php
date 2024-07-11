@@ -38,6 +38,8 @@ Route::delete('/clientes/apagar/{animal}', [ClientesController::class,'apagar'])
 
 Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
 
+Route::get('/usuarios/cadastrar', [UsuariosController::class, 'cadastrar']) -> name('usuarios.cadastrar');
+
 Route::post('/usuarios/cadastrar', [UsuariosController::class, 'gravar']) -> name('usuarios.gravar');
 
 Route::get('/usuarios/apagar/{usuario}', [UsuariosController::class,'apagar']) -> name ('usuarios.apagar');//passar animal por parametro
@@ -45,3 +47,9 @@ Route::get('/usuarios/apagar/{usuario}', [UsuariosController::class,'apagar']) -
 Route::get('/usuarios/editar/{usuario}', [UsuariosController::class, 'editar'])->name('usuarios.editar');
 
 Route::put('/usuarios/editar/{usuario}', [UsuariosController::class, 'editarGravar']);
+
+Route::get('login', [UsuariosController::class,'login'])->name('login');
+
+Route::post('login', [UsuariosController::class,'login']);
+
+Route::get('logout', [UsuariosController::class, 'logout'])->name('logout');

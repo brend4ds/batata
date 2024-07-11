@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
     public function index(){
-        $dados = Usuario::all();
+        $dados = Usuario::orderBy('name', 'asc')->get();
         //dd($dados); //funcao mais import do laravel
         return view('usuarios.index', [
             'usuarios' => $dados,
@@ -20,12 +21,15 @@ class UsuariosController extends Controller
 
     public function gravar(Request $form){//acessado animias.cadastrar via post, submetendo o form
         $dados = $form->validate([ //validar os dados antes do create
-            'nome' => 'required',//campo nome temq  ser obrigatorio  
+            'name' => 'required',//campo nome temq  ser obrigatorio  
             'email' => 'required',
-            'usuario' => 'required', //campo idade temq ser obrig e inteiro
-            'senha' => 'required',
+            'username' => 'required', //campo idade temq ser obrig e inteiro
+            'password' => 'required',
             'admin' => 'boolean'
         ]);
+
+        $dados['password'] = Hash::make($dados['password']);
+
         Usuario::create($dados);
         
         return redirect()->route('usuarios');
@@ -45,12 +49,28 @@ class UsuariosController extends Controller
 
     public function editarGravar(Request $form, Usuario $usuario){
         $dados = $form->validate([
-        'nome' => 'required|max:255',
-        'idade' => 'required|integer',
+        'name' => 'required',
+        'email' => 'email|required|unique:usuarios',
+        'username' => 'required|min:3',
+        'password' => 'required|min:3',
+        'admin' => 'boolean'
         ]);
 
         $usuario->fill($dados);
         $usuario->save();
         return redirect()->route('usuarios');
     }
+
+    public function login(Request $form){//mostra o form(get) e validar o login(post)
+        if($form->isMethod('POST')){//se o metodo é post
+            dd($form);
+        }
+
+        return view('usuarios.login');//se o metodo é get
+    }
+
+    public function logout(){
+
+    }
+
 }
