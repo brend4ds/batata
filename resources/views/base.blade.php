@@ -9,11 +9,16 @@
        <hr>
         <a href="{{ route('index') }}">Inicial</a>
         |
-        <a href="{{ route('index') }}">Animais</a>
+        <a href="{{ route('animais') }}">Animais</a>
         |
-        <a href="{{ route('index') }}">Cadastre-se</a>
+        <a href="{{ route('usuarios') }}">Cadastre-se</a>
         |
-        <a href="{{ route('index') }}">Login</a>
+        @if(Auth::user())
+        Olá, <strong>{{Auth::user()['name']}}</strong>.
+        <a href="{{ route ('logout') }}">Logout</a>
+        @else
+        <a href="{{ route('login') }}">Login</a>
+        @endif
         <hr>
         @yield('conteudo')
     </body>

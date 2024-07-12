@@ -15,18 +15,17 @@
         <th>Nome</th>
         <th>Email</th>
         <th>Usuario</th>
-        <th>Senha</th>
         <th>Admin</th>
     </tr>
 
     @foreach($usuarios as $usuario)
     <tr>
-        <td>{{ $usuario['nome'] }}</td>
+        <td>{{ $usuario['name'] }}</td>
         <td>{{ $usuario['email'] }}</td>
-        <td>{{ $usuario['usuario'] }}</td>
-        <td>{{ $usuario['senha'] }}</td>
+        <td>{{ $usuario['username'] }}</td>
         <td>{{ $usuario['admin'] }}</td>
         <td><a href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a></td>
+        <td><a href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a></td>
     </tr>
     @endforeach
 

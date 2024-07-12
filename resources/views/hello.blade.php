@@ -1,1 +1,1 @@
-<p>Meu primeiro arquivo blade :-)</p>
+<p>Meu primeiro arquivo blade :-)</p>'

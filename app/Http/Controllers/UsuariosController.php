@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
@@ -41,6 +42,11 @@ class UsuariosController extends Controller
         ]);
     }
 
+    public function deletar(Usuario $usuario){
+        $usuario->delete();
+        return redirect()->route('usuarios');
+    }
+
     public function editar(Usuario $usuario) {//apaga do banco
         return view('usuarios/editar', [
             'usuario' => $usuario
@@ -63,14 +69,25 @@ class UsuariosController extends Controller
 
     public function login(Request $form){//mostra o form(get) e validar o login(post)
         if($form->isMethod('POST')){//se o metodo é post
-            dd($form);
+            $credenciais = $form->validate([
+                'username' => 'required',
+                'password' => 'required',
+            ]);
+
+            //tenta fzr o login
+            if(Auth::attempt($credenciais)){
+                return redirect()->route('index');
+            }else{
+                return redirect()->route('login')->with('erro', 'Usuário ou senha inválidos');
+            }
         }
 
         return view('usuarios.login');//se o metodo é get
     }
 
     public function logout(){
-
+        Auth::logout();
+        return redirect()->route('index');
     }
 
 }
