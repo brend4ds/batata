@@ -7,7 +7,7 @@
         <hr>
         <a href="{{ route('index') }}">Inicial</a>
         <a href="{{ route('animais') }}">Animais</a>
-        <a href="{{ route('usuarios') }}">Cadastra-se</a>
+        <a href="{{ route('usuarios') }}">Usuários</a>
         <a href="{{ route('login') }}">Login</a>
 
         <hr>

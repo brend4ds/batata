@@ -76,7 +76,8 @@ class UsuariosController extends Controller
 
             //tenta fzr o login
             if(Auth::attempt($credenciais)){
-                return redirect()->route('index');
+                return redirect()->intended(route('index'));//metodo intented rota q a pessoa ta querendo ir, intencional
+                //colocar route index p intended procurar a rota e nao o endereco index
             }else{
                 return redirect()->route('login')->with('erro', 'Usuário ou senha inválidos');
             }

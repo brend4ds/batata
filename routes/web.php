@@ -36,22 +36,20 @@ Route::get('/clientes/apagar/{animal}', [ClientesController::class,'apagar']) ->
 Route::delete('/clientes/apagar/{animal}', [ClientesController::class,'deletar']);
 
 
-Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
 
-Route::get('/usuarios/cadastrar', [UsuariosController::class, 'cadastrar']) -> name('usuarios.cadastrar');
-
-Route::post('/usuarios/cadastrar', [UsuariosController::class, 'gravar']) -> name('usuarios.gravar');
-
-Route::get('/usuarios/apagar/{usuario}', [UsuariosController::class,'apagar']) -> name ('usuarios.apagar');//passar animal por parametro
-
-Route::delete('/usuarios/apagar/{usuario}', [UsuariosController::class,'deletar']);
-
-Route::get('/usuarios/editar/{usuario}', [UsuariosController::class, 'editar'])->name('usuarios.editar');
-
-Route::put('/usuarios/editar/{usuario}', [UsuariosController::class, 'editarGravar']);
 
 Route::get('login', [UsuariosController::class,'login'])->name('login');
 
 Route::post('login', [UsuariosController::class,'login']);
 
 Route::get('logout', [UsuariosController::class, 'logout'])->name('logout');
+
+Route::prefix('usuarios')->middleware('auth')->group(function(){
+    Route::get('/', [UsuariosController::class, 'index'])->name('usuarios');
+    Route::get('/cadastrar', [UsuariosController::class, 'cadastrar'])->name('usuarios.cadastrar');
+    Route::post('/cadastrar', [UsuariosController::class, 'gravar'])->name('usuarios.gravar');
+    Route::get('/apagar/{usuario}', [UsuariosController::class, 'apagar'])->name('usuarios.apagar');
+    Route::delete('/apagar/{usuario}', [UsuariosController::class,'deletar']);
+    Route::get('/editar/{usuario}', [UsuariosController::class, 'editar'])->name('usuarios.editar');
+    Route::put('/editar/{usuario}', [UsuariosController::class, 'editarGravar']);
+});
