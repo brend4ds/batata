@@ -1,4 +1,13 @@
-<html>
+@extends('base')
+
+@section('titulo', 'Página Inicial')
+
+@section('conteudo')
+
+<p>Sejam bem-vindos a página inicial</p>
+
+@endsection
+<!-- <html>
     <head>
         <title>@yield('titulo')</title>
     </head>
@@ -14,4 +23,4 @@
         @yield('conteudo')
         <p>Sejam bem-vindos à página inicial</p>
     </body>
-</html>
+</html> -->
