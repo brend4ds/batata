@@ -68,6 +68,7 @@ class UsuariosController extends Controller
     }
 
     public function login(Request $form){//mostra o form(get) e validar o login(post)
+
         if($form->isMethod('POST')){//se o metodo é post
             $credenciais = $form->validate([
                 'username' => 'required',
