@@ -28,8 +28,10 @@
             <td class="py-4 px-6 border-b border-grey-light">{{ $usuario['email'] }}</td>
             <td class="py-4 px-6 border-b border-grey-light">{{ $usuario['username'] }}</td>
             <td class="py-4 px-6 border-b border-grey-light">{{ $usuario['admin'] }}</td>
-            <td class="py-4 px-6 border-b border-grey-light"><a href="{{ route('animais.editar', $usuario['id']) }}">Editar</a></td>
-            <td class="py-4 px-6 border-b border-grey-light"><a href="{{ route('animais.apagar', $usuario['id']) }}">Apagar</a></td>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"> 
+                <a class="px-3 py-1 font-semibold text-green-900 bg-green-200 border-b border-gray-200 rounded-full" href="{{ route('usuarios.editar', $usuario['id']) }}">Editar</a>
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm"> 
+                <a class="px-3 py-1 font-semibold text-red-900 bg-red-200 border-b border-gray-200 rounded-full" href="{{ route('usuarios.apagar', $usuario['id']) }}">Apagar</a>
         </tr>
     @endforeach
     </tbody>

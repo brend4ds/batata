@@ -20,6 +20,7 @@ class AnimaisController extends Controller
     }
 
     public function gravar(Request $form){//acessado animias.cadastrar via post, submetendo o form
+        dd($form);
         $dados = $form->validate([ //validar os dados antes do create
             'nome' => 'required',//campo nome temq  ser obrigatorio  
             'idade' => 'required|integer' //campo idade temq ser obrig e inteiro
