@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AnimalCadastrar;
 use App\Models\Animal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AnimaisController extends Controller
 {
     public function index(){
-        $dados = Animal::all();
+
+        // wish - com apagados
+        //only apenas apagados
+        //somente get() acesso normal aos nao apagados
+        $dados = Animal::get();
+
         //dd($dados); funcao mais import do laravel
+    
         return view('animais.index', [
             'animais' => $dados,
+
         ]);
     }
     public function cadastrar(){
@@ -20,14 +29,22 @@ class AnimaisController extends Controller
     }
 
     public function gravar(Request $form){//acessado animias.cadastrar via post, submetendo o form
-        dd($form);
+        //animais(nome da pasta imagem(nome do disco q vai armazenar)
+        $img = $form->file('imagem')->store('animais', 'imagens');
+       
+
+        //dd($form);
         $dados = $form->validate([ //validar os dados antes do create
             'nome' => 'required',//campo nome temq  ser obrigatorio  
-            'idade' => 'required|integer' //campo idade temq ser obrig e inteiro
+            'idade' => 'required|integer', //campo idade temq ser obrig e inteiro
+            'imagem' => 'required'
         ]);
-        Animal::create($dados);
-        
-        return redirect()->route('animais');
+
+        $dados['imagem'] = $img;
+
+        #Animal::create($dados);
+        Mail::to('alguem@batata.com')->send(new AnimalCadastrar);
+        #return redirect()->route('animais');
     }
 
     public function apagar( Animal $animal){//mostra na tela a confirmacao

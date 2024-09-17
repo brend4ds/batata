@@ -9,7 +9,7 @@ class ClientesController extends Controller
 {
     public function index(){
         $dados = Cliente::all();
-        //dd($dados); //funcao mais import do laravel
+        //dd($dados); //funcao mais importante do laravel
         return view('clientes.index', [
             'clientes' => $dados,
         ]);
